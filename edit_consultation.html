@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block title%} view appointment {%endblock%}
+{%block content%}
+
+<!--consultation section-->
+<section id="consultation" class="consultation section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Consultation</h2>
+      <p>Make Your Appointment Now And You Will Be Connected To A Qualified Doctor For Consultation</p>
+    </div><!-- End Section Title -->
+  
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+      <form method="post">
+        {% csrf_token %}
+      
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="">Name</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{ appointment.name}}" placeholder="Your Name" required="">
+          </div>
+          <div class="col-md-4 form-group mt-3 mt-md-0">
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="email" id="email" value="{{ appointment.email}}" placeholder="Your Email" required="">
+          </div>
+          <div class="col-md-4 form-group mt-3 mt-md-0">
+            <label for="">Phone</label>
+            <input type="tel" class="form-control" name="phone" id="phone" value="{{ appointment.phone}}" placeholder="Your Phone" required="">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group mt-3">
+            <label for="">Date</label>
+            <input type="datetime-local" name="date" class="form-control datepicker" id="date" value="{{ appointment.date|default:''|date:'Y-m-d\\TH:i' }}"
+           placeholder="Appointment Date" required="">
+          </div>
+          <div class="col-md-4 form-group mt-3">
+            <label for="">Department</label>
+            <select name="department" id="department" class="form-select" required="">
+              <option value="">Select Department</option>
+              <option value="Internal Medicine" {% if appointment.department == "Internal Medicine" %}selected{% endif %}>Internal Medicine</option>
+              <option value="Obstetrics & Gynecology (OB-GYN)" {% if appointment.department == "Obstetrics & Gynecology (OB-GYN)" %}selected{% endif %}>Obstetrics & Gynecology (OB-GYN)</option>
+              <option value="Pediatrics" {% if appointment.department == "Pediatrics" %}selected{% endif %}>Pediatrics</option>
+            </select>
+          </div>
+          
+          <div class="col-md-4 form-group mt-3">
+            <label for="">Doctor</label>
+            <select name="doctor" id="doctor" class="form-select" required="">
+              <option value="">Select Doctor</option>       
+              <option value="Psychiatrists" {% if appointment.doctor == "Psychiatrists" %}selected{% endif %}>Psychiatrists</option>
+              <option value="Gynecologists" {% if appointment.doctor == "Gynecologists" %}selected{% endif %}>Gynecologists</option>
+              <option value="Pediatricians" {% if appointment.doctor == "Pediatricians" %}selected{% endif %}>Pediatricians</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="form-group mt-3">
+          <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)">{{ appointment.message}}</textarea>
+        </div>
+        
+          
+          <div class="text-center"><button type="submit" class="btn btn-primary">Make an Appointment</button></div>
+        </div>
+      </form>
+  
+    </div>
+  
+  </section><!-- /Appointment Section -->
+
+  {% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block title%} login {%endblock%}
+
+{%block content%}
+
+<section id="login" class="login">
+<div class="simple-login-container">
+    <h2>Login</h2>
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <form method="post">
+            {%csrf_token%}
+            <input type="text" class="form-control" name="username" placeholder="Username">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <input type="password" placeholder="Enter your Password" name="password" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <input type="submit" class="btn btn-block btn-login" placeholder="Enter your Password" >
+        </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
+    </div>
+</div>
+</section>
+{%endblock%}
